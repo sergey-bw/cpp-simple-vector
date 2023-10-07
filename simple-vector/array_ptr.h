@@ -38,7 +38,13 @@ public:
 
     // Перемещающий оператор присваивания
     ArrayPtr& operator=(ArrayPtr&& rhs) {
-        raw_ptr_ = std::exchange(rhs.raw_ptr_, nullptr);
+        /*
+            Спасибо большое за комментарий,
+            понял из-за чего будет утечка памяти.
+        */
+        if (this != &rhs) {
+            swap(rhs);
+        }
         return *this;
     }
 

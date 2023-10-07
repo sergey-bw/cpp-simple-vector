@@ -90,9 +90,11 @@ public:
     }
 
     SimpleVector& operator=(SimpleVector&& rhs) {
-        items_ = std::move(rhs.items_);
-        size_ = std::exchange(rhs.size_, 0);
-        capacity_ = std::exchange(rhs.capacity_, 0);
+        if (this != &rhs) {
+            items_ = std::move(rhs.items_);
+            size_ = std::exchange(rhs.size_, 0);
+            capacity_ = std::exchange(rhs.capacity_, 0);
+        }
         return *this;
     }
 
