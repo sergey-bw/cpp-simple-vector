@@ -258,7 +258,6 @@ public:
         ArrayPtr<Type> tmp(new_capacity);
         std::copy(std::make_move_iterator(begin())
             , std::make_move_iterator(end()), &tmp[0]);
-        //std::fill(&tmp[size_], &tmp[new_size], static_cast<Type>(0));
         if (std::is_copy_constructible<Type>::value) {
             for (auto it = &tmp[size_]; it != &tmp[new_size]; ++it) {
                 *it = std::move(Type(0));
